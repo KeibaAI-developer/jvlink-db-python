@@ -1,0 +1,145 @@
+name: CI
+
+# mainブランチへのpushまたはプルリクエスト時にトリガー
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-type-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true  # JVLinkToSQLiteサブモジュールを含める
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: jvlink-db-python-${{ runner.os }}-pip-${{ hashFiles('requirements-dev.txt') }}
+        restore-keys: |
+          jvlink-db-python-${{ runner.os }}-pip-
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-dev.txt
+
+    - name: Run isort check
+      run: |
+        echo "::group::isort check"
+        isort --profile=black --line-length=100 --check-only --diff \
+          jvlink_db_python/ \
+          test/ \
+          example/
+        echo "::endgroup::"
+
+    - name: Run flake8
+      run: |
+        echo "::group::flake8 check"
+        flake8 \
+          jvlink_db_python/ \
+          test/ \
+          example/ \
+          --max-line-length=100 \
+          --ignore=E203,W503,ANN101,ANN204,ANN401,D105,D107,D403,D415,DAR101,DAR201 \
+          --select=E,W,F,N,D \
+          --docstring-convention=google \
+          --statistics
+        echo "::endgroup::"
+
+    - name: Run mypy
+      run: |
+        echo "::group::mypy check"
+        mypy \
+          jvlink_db_python/ \
+          --config-file=mypy.ini
+        echo "::endgroup::"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint-and-type-check
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: jvlink-db-python-test-${{ runner.os }}-pip-${{ hashFiles('requirements-dev.txt') }}
+        restore-keys: |
+          jvlink-db-python-test-${{ runner.os }}-pip-
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-dev.txt
+
+    - name: Run unit tests
+      run: |
+        echo "::group::Unit tests"
+        pytest test/unit/ \
+          -v \
+          --cov=jvlink_db_python \
+          --cov-report=term-missing \
+          --cov-report=xml \
+          --cov-report=html
+        echo "::endgroup::"
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+    - name: Archive coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: htmlcov/
+
+  integration-test:
+    runs-on: ubuntu-latest
+    needs: test
+    # 結合テストは条件付きで実行（Windows環境が必要なため）
+    if: false  # 現時点ではスキップ
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-dev.txt
+
+    - name: Run integration tests
+      run: |
+        pytest test/integration/ -v

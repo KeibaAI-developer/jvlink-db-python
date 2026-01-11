@@ -1,0 +1,19 @@
+# jvlink-db-python 開発用パッケージ
+
+-r requirements.txt
+
+# テスト
+pytest>=7.0.0
+pytest-mock>=3.10.0
+pytest-cov>=4.0.0
+
+# コード品質管理
+black>=23.3.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.3.0
+flake8-docstrings>=1.7.0
+darglint>=1.8.1
+
+# pre-commitフック
+pre-commit>=3.0.0

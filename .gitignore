@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 仮想環境
+venv/
+ENV/
+env/
+.venv
+
+# テスト・カバレッジ
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# データベースファイル（テスト用は除く）
+*.db
+!test/fixtures/*.db
+
+# ログファイル
+*.log
+
+# 環境設定（機密情報含む可能性）
+.env
+.env.local
+
+# JVLinkToSQLite設定ファイル（ユーザー固有）
+setting.xml
+
+# その他
+*.bak
+*.tmp

@@ -1,0 +1,37 @@
+# jvlink-db-python デフォルト設定
+
+# データベースパス
+database:
+  path: "./race.db"
+
+# JVLinkToSQLite設定
+jvlinktosqlite:
+  path: "./JVLinkToSQLiteArtifact_0.1.0.0.exe"
+  setting_xml: "./setting.xml"
+
+# データ取得設定
+data_specs:
+  # デフォルトで取得するデータ種別
+  default:
+    - RACE  # レース情報
+    - SE    # 出走馬情報
+    - UM    # 馬マスタ
+    - KS    # 騎手マスタ
+    - CH    # 厩舎マスタ
+    - BR    # 生産者マスタ
+    - BN    # 馬主マスタ
+    - HR    # 払戻情報
+    - O1    # オッズ（単複枠）
+    - O2    # オッズ（馬連）
+    - O3    # オッズ（ワイド）
+    - O4    # オッズ（馬単）
+    - O5    # オッズ（三連複）
+    - O6    # オッズ（三連単）
+
+# 更新設定
+update:
+  # 速報系データ種別
+  realtime:
+    - RA  # 速報レース情報
+    - SE  # 速報出走馬情報
+    - HR  # 速報払戻情報
