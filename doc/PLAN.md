@@ -139,12 +139,17 @@ jvlink-db-python/
 **作業内容**:
 - `jvlink_db_python/exceptions.py`: 例外クラス定義
 - `jvlink_db_python/utils/config.py`: 設定ファイル読み込み
-- `config/config.yml`: デフォルト設定ファイル
+- `config/config.yml`: デフォルト設定ファイル（既存ファイルを更新）
 - `test/unit/utils/config/`: config.pyの単体テスト
 
 **実装内容**:
 - `JVLinkDBError`, `DatabaseNotFoundError`, `JVLinkToSQLiteError`, `DataNotFoundError`, `IDConversionError`
 - YAMLファイル読み込み、デフォルト値の適用
+- 設定ファイルのキー名：
+  - `jvlinktosqlite.path`: JVLinkToSQLite実行ファイルパス
+  - `jvlinktosqlite.setting_xml`: 設定ファイル名
+  - `data_specs.default`: 取得するデータ種別リスト
+  - `update.realtime`: リアルタイム系データ種別
 
 **テスト**:
 - 設定ファイル読み込み（正常系）
@@ -155,6 +160,7 @@ jvlink-db-python/
 - 例外クラスの階層構造が適切か
 - 設定項目が網羅されているか
 - docstringがGoogle Styleか
+- 設定ファイルの構造が実際のconfig.ymlと一致しているか
 
 ---
 

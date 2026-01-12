@@ -164,4 +164,4 @@ MIT License
 
 ## サポート
 
-問題や質問がある場合は、[Issues](https://github.com/KeibaAI/jvlink-db-python/issues)で報告してください。
+問題や質問がある場合は、[Issues](https://github.com/KeibaAI-developer/jvlink-db-python/issues)で報告してください。
