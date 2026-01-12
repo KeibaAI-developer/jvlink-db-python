@@ -159,6 +159,9 @@ def jvlink_to_race_id(
     Returns:
         str: netkeibaのrace_id (YYYYKKNNTTRR形式)
 
+    Raises:
+        IDConversionError: IDフォーマットが不正な場合  # noqa: DAR402
+
     Examples:
         >>> jvlink_to_race_id("2025", "06", "01", "01", "01")
         "202506010101"
@@ -204,6 +207,9 @@ def jvlink_to_date_id(
 
     Returns:
         str: netkeibaのdate_id (YYYYMMDDKKRR形式)
+
+    Raises:
+        IDConversionError: IDフォーマットが不正な場合  # noqa: DAR402
 
     Examples:
         >>> jvlink_to_date_id("2025", "01", "05", "06", "01")
@@ -296,6 +302,8 @@ def _validate_jyo_cd(jyo_cd: str) -> None:
     Raises:
         IDConversionError: jyo_cdが不正な場合
     """
+    if jyo_cd is None:
+        raise IDConversionError("jyo_cdがNoneです")
     if not isinstance(jyo_cd, str) or len(jyo_cd) != 2:
         raise IDConversionError(f"jyo_cdは2桁の文字列である必要があります: {jyo_cd}")
     if not jyo_cd.isdigit():
