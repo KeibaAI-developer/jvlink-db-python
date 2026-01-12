@@ -47,8 +47,16 @@ def load_config(config_path: str | None = None) -> dict[str, Any]:
             user_config = yaml.safe_load(f)
 
         # user_configがNoneまたは空の場合はデフォルト設定を返す
-        if not user_config:
+        if user_config is None or (isinstance(user_config, dict) and not user_config):
             return default_config
+
+        # user_configがdictでない場合はエラー
+        if not isinstance(user_config, dict):
+            error_message = (
+                f"設定ファイルの形式が不正です: "
+                f"辞書形式のYAMLが期待されますが、{type(user_config).__name__}型が読み込まれました"
+            )
+            raise JVLinkDBError(error_message)
 
         # デフォルト設定にユーザー設定をマージ
         merged_config = _merge_config(default_config, user_config)
