@@ -169,7 +169,7 @@ jvlink-db-python/
 **目的**: netkeiba IDとJV-Link IDの相互変換機能
 
 **作業内容**:
-- `jvlink_db_python/utils/id_converter.py`: IDConverter実装
+- `jvlink_db_python/utils/id_converter.py`: 変換関数実装
 - `test/unit/utils/id_converter/`: 単体テスト
 
 **実装内容**:
