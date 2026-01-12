@@ -1,22 +1,22 @@
 """sex_code_to_str関数の単体テスト"""
 
+import pytest
+
 from jvlink_db_python.utils.code_converter import sex_code_to_str
 
 
 # 正常系
-def test_sex_code_to_str_stallion() -> None:
-    """性別コード1が牡に変換されることを確認"""
-    assert sex_code_to_str("1") == "牡"
-
-
-def test_sex_code_to_str_mare() -> None:
-    """性別コード2が牝に変換されることを確認"""
-    assert sex_code_to_str("2") == "牝"
-
-
-def test_sex_code_to_str_gelding() -> None:
-    """性別コード3がセに変換されることを確認"""
-    assert sex_code_to_str("3") == "セ"
+@pytest.mark.parametrize(
+    ("code", "expected"),
+    [
+        ("1", "牡"),
+        ("2", "牝"),
+        ("3", "セ"),
+    ],
+)
+def test_sex_code_to_str_normal(code: str, expected: str) -> None:
+    """性別コードが正しく変換されることを確認"""
+    assert sex_code_to_str(code) == expected
 
 
 # 準正常系

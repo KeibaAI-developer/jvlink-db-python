@@ -252,7 +252,7 @@ def track_code_to_str(code: str) -> str:
 
     Examples:
         >>> track_code_to_str("10")
-        "芝"
+        "芝・直線"
         >>> track_code_to_str("23")
         "ダート・左回り"
     """
@@ -272,7 +272,7 @@ def grade_code_to_str(code: str) -> str:
         >>> grade_code_to_str("A")
         "G1"
         >>> grade_code_to_str("H")
-        "1勝クラス"
+        "J･G3"
     """
     return _GRADE_CODE_MAP.get(code, "不明")
 
@@ -289,7 +289,7 @@ def baba_code_to_str(code: str) -> str:
     Examples:
         >>> baba_code_to_str("1")
         "良"
-        >>> baba_code_to_str("4")
+        >>> baba_code_to_str("9")
         "不明"
     """
     return _BABA_CODE_MAP.get(code, "不明")

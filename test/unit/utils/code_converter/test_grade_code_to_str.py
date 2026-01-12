@@ -1,52 +1,28 @@
 """grade_code_to_str関数の単体テスト"""
 
+import pytest
+
 from jvlink_db_python.utils.code_converter import grade_code_to_str
 
 
 # 正常系
-def test_grade_code_to_str_g1() -> None:
-    """グレードコードAがG1に変換されることを確認"""
-    assert grade_code_to_str("A") == "G1"
-
-
-def test_grade_code_to_str_g2() -> None:
-    """グレードコードBがG2に変換されることを確認"""
-    assert grade_code_to_str("B") == "G2"
-
-
-def test_grade_code_to_str_g3() -> None:
-    """グレードコードCがG3に変換されることを確認"""
-    assert grade_code_to_str("C") == "G3"
-
-
-def test_grade_code_to_str_重賞_open_special() -> None:
-    """グレードコードDがグレードのない重賞に変換されることを確認"""
-    assert grade_code_to_str("D") == "グレードのない重賞"
-
-
-def test_grade_code_to_str_open() -> None:
-    """グレードコードEが重賞以外の特別競走に変換されることを確認"""
-    assert grade_code_to_str("E") == "重賞以外の特別競走"
-
-
-def test_grade_code_to_str_3_wins() -> None:
-    """グレードコードFがJ･G1に変換されることを確認"""
-    assert grade_code_to_str("F") == "J･G1"
-
-
-def test_grade_code_to_str_2_wins() -> None:
-    """グレードコードGがJ･G2に変換されることを確認"""
-    assert grade_code_to_str("G") == "J･G2"
-
-
-def test_grade_code_to_str_1_win() -> None:
-    """グレードコードHがJ･G3に変換されることを確認"""
-    assert grade_code_to_str("H") == "J･G3"
-
-
-def test_grade_code_to_str_listed() -> None:
-    """グレードコードLがリステッドに変換されることを確認"""
-    assert grade_code_to_str("L") == "リステッド"
+@pytest.mark.parametrize(
+    ("code", "expected"),
+    [
+        ("A", "G1"),
+        ("B", "G2"),
+        ("C", "G3"),
+        ("D", "グレードのない重賞"),
+        ("E", "重賞以外の特別競走"),
+        ("F", "J･G1"),
+        ("G", "J･G2"),
+        ("H", "J･G3"),
+        ("L", "リステッド"),
+    ],
+)
+def test_grade_code_to_str_normal(code: str, expected: str) -> None:
+    """グレードコードが正しく変換されることを確認"""
+    assert grade_code_to_str(code) == expected
 
 
 # 準正常系
