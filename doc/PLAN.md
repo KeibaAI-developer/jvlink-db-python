@@ -197,7 +197,7 @@ jvlink-db-python/
 **目的**: JV-Linkのコード値を人間が読める文字列に変換
 
 **作業内容**:
-- `jvlink_db_python/utils/code_converter.py`: CodeConverter実装
+- `jvlink_db_python/utils/code_converter.py`: 変換関数実装
 - `test/unit/utils/code_converter/`: 単体テスト
 
 **実装内容**:
