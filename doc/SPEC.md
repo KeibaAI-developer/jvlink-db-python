@@ -123,6 +123,12 @@ JV-Link KettoNum:  202210XXXXX
 | RT_HR_PAY | 払戻情報（速報系） | リアルタイム配当 |
 | NL_O1_ODDS_TANFUKUWAKU | 単勝・複勝・枠連オッズ | オッズ情報 |
 | RT_O1_ODDS_TANFUKUWAKU | 単勝・複勝・枠連オッズ（速報系） | リアルタイムオッズ |
+| RT_WH_BATAIJYU | 馬体重（速報系） | リアルタイム馬体重 |
+| RT_WE_WEATHER | 天候（速報系） | リアルタイム天候情報 |
+| RT_AV_INFO | 出走取消・競走除外（速報系） | 出走取消・競走除外情報 |
+| RT_JC_INFO | 騎手変更（速報系） | 騎手変更情報 |
+| RT_TC_INFO | 発走時刻変更（速報系） | 発走時刻変更情報 |
+| RT_CC_INFO | コース変更（速報系） | コース変更情報 |
 | NL_CS_COURSE | コース情報 | 芝コース使用日数等 |
 | SY_PROC_FILES | 処理済みファイル管理 | 更新管理用 |
 
@@ -463,33 +469,101 @@ class IDConversionError(JVLinkDBError):
 ```yaml
 # config.yml
 database:
-  path: "race.db"
-  backup_dir: "backup/"
+  path: "./race.db"
+  backup_dir: "./backup/"  # オプション
 
 jvlinktosqlite:
-  executable_path: "JVLinkToSQLite/jvlinktosqlite.exe"
-  setting_file: "setting.xml"
-  throttle_size: 100
-  log_level: "Info"
+  path: "./JVLinkToSQLiteArtifact_0.1.0.0.exe"
+  setting_xml: "./setting.xml"
+  throttle_size: 100  # オプション
+  log_level: "Info"  # オプション（Trace, Debug, Info, Warn, Error, Fatal）
 
 data_specs:
-  # 取得するデータ種別
-  enabled:
-    - "RA"  # レース詳細
-    - "SE"  # 馬毎レース情報
-    - "UM"  # 競走馬マスタ
-    - "KS"  # 騎手マスタ
-    - "CH"  # 調教師マスタ
-    - "BN"  # 馬主マスタ
-    - "BR"  # 生産者マスタ
-    - "YS"  # 年間スケジュール
-    - "HR"  # 払戻
-    - "O1"  # 単複枠オッズ
+  # 取得するデータ種別（JVLinkToSQLite Data Spec記号）
+  # 詳細はJVLinkToSQLite.wiki/Table-Spec.md
+  # 対応テーブル: NL_{レコード種別ID}_* (例: RA → NL_RA_{サフィックス})
+  # 注意: 1つのレコード種別IDが複数テーブルを生成する場合があります
+  default:
+    # コース情報
+    - CS    # コース情報（NL_CS_COURSE）
+
+    # レース情報
+    - YS    # 年間スケジュール（NL_YS_SCHEDULE）
+    - RA    # レース詳細（NL_RA_RACE）
+
+    # 馬情報
+    - TK    # 特別登録馬（NL_TK_TOKUUMA + NL_TK_TokuUmaInfo）
+    - SE    # 馬毎レース情報（NL_SE_RACE_UMA）
+    - HS    # 競走馬市場取引価格（NL_HS_SALE）
+    - HY    # 馬名の意味由来（NL_HY_BAMEIORIGIN）
+    - HN    # 繁殖馬マスタ（NL_HN_HANSYOKU）
+    - SK    # 産駒マスタ（NL_SK_SANKU）
+    - BT    # 系統情報（NL_BT_KEITO）
+
+    # オッズ情報
+    - HR    # 払戻情報（NL_HR_PAY）
+    - H1    # 票数全掛（NL_H1_HYOSU_ZENKAKE + NL_H1_Hyo*系列）
+    - H6    # 票数三連単（NL_H6_HYOSU_SANRENTAN + NL_H6_HyoSanrentan）
+    - O1    # 単勝・複勝・枠連オッズ（NL_O1_ODDS_TANFUKUWAKU）
+    - O2    # 馬連オッズ（NL_O2_ODDS_UMAREN）
+    - O3    # ワイドオッズ（NL_O3_ODDS_WIDE）
+    - O4    # 馬単オッズ（NL_O4_ODDS_UMATAN）
+    - O5    # 三連複オッズ（NL_O5_ODDS_SANREN + NL_O5_OddsSanrenInfo）
+    - O6    # 三連単オッズ（NL_O6_ODDS_SANRENTAN + NL_O6_OddsSanrentanInfo）
+    - WF    # 重勝式(WIN5)（NL_WF_INFO）
+
+    # マスタ情報
+    - JG    # 競走馬除外情報（NL_JG_JOGAIBA）
+    - UM    # 競走馬マスタ（NL_UM_UMA）
+    - KS    # 騎手マスタ（NL_KS_KISYU）
+    - CH    # 調教師マスタ（NL_CH_CHOKYOSI）
+    - BR    # 生産者マスタ（NL_BR_BREEDER）
+    - BN    # 馬主マスタ（NL_BN_BANUSI）
+    - RC    # レコードマスタ（NL_RC_RECORD）
+    - CK    # 出走別着度数（NL_CK_CHAKU + NL_CK_*Chaku系列）
+
+    # 調教情報
+    - HC    # 坂路調教（NL_HC_HANRO）
+    - WC    # ウッドチップ調教（NL_WC_WOOD）
+
+    # TARGET独自指数
+    - DM    # タイム型データマイニング予想（NL_DM_INFO）
+    - TM    # 対戦型データマイニング予想（NL_TM_INFO）
 
 update:
-  auto_update: false
-  update_interval_minutes: 60
-  realtime_data_specs: ["RT_RA", "RT_SE", "RT_HR", "RT_O1"]
+  auto_update: false  # オプション
+  update_interval_minutes: 15  # オプション
+  # 速報系データ種別（RT_プレフィックス）
+  # 詳細はJVLinkToSQLite.wiki/Table-Spec.md
+  # 対応テーブル: RT_{レコード種別ID}_* (例: RA → RT_RA_{サフィックス})
+  realtime:
+    # レース情報
+    - RA  # 速報レース詳細（RT_RA_RACE）
+    - SE  # 速報馬毎レース情報（出馬表）（RT_SE_RACE_UMA）
+
+    # オッズ
+    - HR  # 速報払戻（RT_HR_PAY）
+    - O1  # 速報単勝・複勝・枠連オッズ（RT_O1_ODDS_TANFUKUWAKU）
+    - O2  # 速報馬連オッズ（RT_O2_ODDS_UMAREN）
+    - O3  # 速報ワイドオッズ（RT_O3_ODDS_WIDE）
+    - O4  # 速報馬単オッズ（RT_O4_ODDS_UMATAN）
+    - O5  # 速報三連複オッズ（RT_O5_ODDS_SANREN + RT_O5_OddsSanrenInfo）
+    - O6  # 速報三連単オッズ（RT_O6_ODDS_SANRENTAN + RT_O6_OddsSanrentanInfo）
+    - H1  # 速報票数全掛（RT_H1_HYOSU_ZENKAKE + RT_H1_Hyo*系列）
+    - H6  # 速報票数三連単（RT_H6_HYOSU_SANRENTAN + RT_H6_HyoSanrentan）
+    - WF  # 速報重勝式(WIN5)（RT_WF_INFO）
+
+    # レース変更情報
+    - WH  # 速報馬体重（RT_WH_BATAIJYU）
+    - WE  # 天候馬場状態（RT_WE_WEATHER）
+    - AV  # 速報出走取消・競走除外（RT_AV_INFO）
+    - JC  # 速報騎手変更（RT_JC_INFO）
+    - TC  # 速報発走時刻変更（RT_TC_INFO）
+    - CC  # 速報コース変更（RT_CC_INFO）
+
+    # TARGET独自指数
+    - DM  # 速報タイム型データマイニング予想（RT_DM_INFO）
+    - TM  # 速報対戦型データマイニング予想（RT_TM_INFO）
 ```
 
 ## 7. パフォーマンス要件
