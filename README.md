@@ -35,7 +35,7 @@ race.dbから以下のデータをpandas DataFrameとして取得できます：
 ## 必須環境
 
 - **OS**: Windows 10/11（JV-Link動作環境）
-- **Python**: 3.8以上
+- **Python**: 3.12以上
 - **JV-Link SDK**: Ver4.8.0.2以上
 - **JVLinkToSQLite**: 実行ファイル
 
@@ -153,8 +153,7 @@ MIT License
 ## 関連リンク
 
 - [JVLinkToSQLite](https://github.com/urasandesu/JVLinkToSQLite)
-- [JV-Link 仕様書](https://jra-van.jp/dlb/sdk/index.html)
-- [KeibaAI プロジェクト](https://github.com/KeibaAI)
+- [JV-Link](https://developer.jra-van.jp/t/topic/45)
 
 ## 注意事項
 

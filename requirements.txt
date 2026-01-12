@@ -1,0 +1,7 @@
+# jvlink-db-python 依存パッケージ
+
+# データ処理
+pandas>=2.0.0
+
+# 設定ファイル読み込み
+PyYAML>=6.0

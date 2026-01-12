@@ -1,0 +1,39 @@
+# jvlink-db-python デフォルト設定
+
+# データベースパス
+database:
+  path: "./race.db"
+
+# JVLinkToSQLite設定
+jvlinktosqlite:
+  path: "./JVLinkToSQLiteArtifact_0.1.0.0.exe"
+  setting_xml: "./setting.xml"
+
+# データ取得設定
+data_specs:
+  # デフォルトで取得するデータ種別（JVLinkToSQLite Data Spec記号）
+  # 対応テーブル: NL_{記号}_* (例: RA → NL_RA_RACE)
+  default:
+    - RA    # レース詳細（NL_RA_RACE）
+    - SE    # 馬毎レース情報（NL_SE_RACE_UMA）
+    - UM    # 競走馬マスタ（NL_UM_UMA）
+    - KS    # 騎手マスタ（NL_KS_KISYU）
+    - CH    # 調教師マスタ（NL_CH_CHOKYOSI）
+    - BR    # 生産者マスタ（NL_BR_BREEDER）
+    - BN    # 馬主マスタ（NL_BN_BANUSI）
+    - YS    # 年間スケジュール（NL_YS_SCHEDULE）
+    - HR    # 払戻情報（NL_HR_PAY）
+    - O1    # 単勝・複勝・枠連オッズ（NL_O1_ODDS_TANFUKUWAKU）
+    - O2    # 馬連オッズ（NL_O2_ODDS_UMAREN）
+    - O3    # ワイドオッズ（NL_O3_ODDS_WIDE）
+    - O4    # 馬単オッズ（NL_O4_ODDS_UMATAN）
+    - O5    # 三連複オッズ（NL_O5_ODDS_SANREN）
+    - O6    # 三連単オッズ（NL_O6_ODDS_SANRENTAN）
+
+# 更新設定
+update:
+  # 速報系データ種別（RT_プレフィックス）
+  realtime:
+    - RA  # 速報レース詳細（RT_RA_RACE）
+    - SE  # 速報馬毎レース情報（RT_SE_RACE_UMA）
+    - HR  # 速報払戻情報（RT_HR_PAY）
