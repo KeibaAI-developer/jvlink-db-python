@@ -25,7 +25,7 @@ def test_init_with_default_config(
     )
 
     # デフォルト設定で初期化
-    manager = JVLinkDBManager(jvlinktosqlite_path=str(temp_jvlinktosqlite_exe))
+    manager = JVLinkDBManager()
 
     # デフォルト値が設定されていることを確認
     assert manager.db_path == Path("./race.db")
@@ -133,7 +133,7 @@ def test_init_jvlinktosqlite_not_found(tmp_path: Path) -> None:
         JVLinkDBManager(jvlinktosqlite_path=str(non_existent_path))
 
     # エラーメッセージに実行ファイルが見つからない旨が含まれることを確認
-    assert "JVLinkToSQLiteArtifact_0.1.0.0.exeが見つかりません" in str(exc_info.value)
+    assert "non_existent.exeが見つかりません" in str(exc_info.value)
 
 
 def test_init_jvlinktosqlite_is_directory(tmp_path: Path) -> None:
@@ -151,4 +151,4 @@ def test_init_jvlinktosqlite_is_directory(tmp_path: Path) -> None:
         JVLinkDBManager(jvlinktosqlite_path=str(dir_path))
 
     # エラーメッセージにファイルではない旨が含まれることを確認
-    assert "JVLinkToSQLiteArtifact_0.1.0.0.exeがファイルではありません" in str(exc_info.value)
+    assert "jvlinktosqlite_dirがファイルではありません" in str(exc_info.value)

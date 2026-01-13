@@ -57,7 +57,7 @@ class JVLinkDBManager:
         # JVLinkToSQLite実行ファイルの存在チェック
         if not self.jvlinktosqlite_path.exists():
             error_message = (
-                f"JVLinkToSQLiteArtifact_0.1.0.0.exeが見つかりません: "
+                f"{self.jvlinktosqlite_path.name}が見つかりません: "
                 f"{self.jvlinktosqlite_path.absolute()}"
             )
             raise JVLinkToSQLiteError(error_message)
@@ -65,7 +65,7 @@ class JVLinkDBManager:
         # 実行ファイルかどうかを確認（Windowsでは.exe）
         if not self.jvlinktosqlite_path.is_file():
             error_message = (
-                f"JVLinkToSQLiteArtifact_0.1.0.0.exeがファイルではありません: "
+                f"{self.jvlinktosqlite_path.name}がファイルではありません: "
                 f"{self.jvlinktosqlite_path.absolute()}"
             )
             raise JVLinkToSQLiteError(error_message)
