@@ -4,3 +4,6 @@
 [submodule "JVLinkToSQLite.wiki"]
 	path = JVLinkToSQLite.wiki
 	url = https://github.com/urasandesu/JVLinkToSQLite.wiki.git
+[submodule "HRSoftUsingJVLinkToSQLite"]
+    path = HRSoftUsingJVLinkToSQLite
+    url = https://github.com/urasandesu/HRSoftUsingJVLinkToSQLite
