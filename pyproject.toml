@@ -42,10 +42,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/KeibaAI/jvlink-db-python"
-Documentation = "https://github.com/KeibaAI/jvlink-db-python/blob/main/README.md"
-Repository = "https://github.com/KeibaAI/jvlink-db-python"
-Issues = "https://github.com/KeibaAI/jvlink-db-python/issues"
+Homepage = "https://github.com/KeibaAI-developer/jvlink-db-python"
+Documentation = "https://github.com/KeibaAI-developer/jvlink-db-python/blob/main/README.md"
+Repository = "https://github.com/KeibaAI-developer/jvlink-db-python"
+Issues = "https://github.com/KeibaAI-developer/jvlink-db-python/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
