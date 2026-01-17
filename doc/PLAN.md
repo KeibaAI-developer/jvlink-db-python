@@ -226,7 +226,7 @@ jvlink-db-python/
 **作業内容**:
 - `jvlink_db_python/manager.py`: JVLinkDBManagerクラス定義
 - コンストラクタ、設定読み込み
-- JVLinkToSQLiteArtifact_0.1.0.0.exe存在チェック
+- JVLinkToSQLite.exe存在チェック
 - `test/unit/manager/conftest.py`: テスト用fixture
 
 **実装内容**:
@@ -244,7 +244,7 @@ class JVLinkDBManager:
 **テスト**:
 - デフォルト設定での初期化（正常系）
 - カスタム設定での初期化（正常系）
-- JVLinkToSQLiteArtifact_0.1.0.0.exeが存在しない（準正常系）
+- JVLinkToSQLite.exeが存在しない（準正常系）
 
 **レビューポイント**:
 - クラス設計が適切か

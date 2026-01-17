@@ -176,10 +176,9 @@ manager = JVLinkDBManager(
     jvlinktosqlite_path="path/to/jvlinktosqlite.exe"
 )
 
-# 初期データベース生成
+# 初期データベース生成（指定日以降のすべてのデータを取得）
 manager.initialize_database(
     start_date="2023-01-01",
-    end_date="2024-12-31",
     data_specs=["RA", "SE", "UM", "KS", "CH", "BN", "BR", "YS", "HR", "O1"]
 )
 ```
@@ -473,7 +472,7 @@ database:
   backup_dir: "./backup/"  # オプション
 
 jvlinktosqlite:
-  path: "./JVLinkToSQLiteArtifact_0.1.0.0.exe"
+  path: "./HRSoftUsingJVLinkToSQLite/HRSoftUsingJVLinkToSQLite/JVLinkToSQLiteArtifact/JVLinkToSQLite.exe"
   setting_xml: "./setting.xml"
   throttle_size: 100  # オプション
   log_level: "Info"  # オプション（Trace, Debug, Info, Warn, Error, Fatal）

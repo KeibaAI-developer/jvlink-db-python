@@ -28,7 +28,7 @@ def test_init_with_default_config(
     manager = JVLinkDBManager()
 
     # デフォルト値が設定されていることを確認
-    assert manager.db_path == Path("./race.db")
+    assert manager.db_path == Path("./race.db").resolve()
     assert manager.jvlinktosqlite_path == temp_jvlinktosqlite_exe
     assert "database" in manager.config
     assert "jvlinktosqlite" in manager.config
@@ -79,7 +79,7 @@ def test_init_with_config_file(temp_config_file: Path, temp_jvlinktosqlite_exe: 
     manager = JVLinkDBManager(config_path=str(temp_config_file))
 
     # 設定ファイルの内容が反映されていることを確認
-    assert manager.db_path == Path("./test_race.db")
+    assert manager.db_path == Path("./test_race.db").resolve()
     assert manager.jvlinktosqlite_path == temp_jvlinktosqlite_exe
     assert manager.config["jvlinktosqlite"]["throttle_size"] == 200
     assert manager.config["jvlinktosqlite"]["log_level"] == "Debug"
