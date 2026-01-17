@@ -39,7 +39,8 @@ def test_load_config_returns_default_when_file_not_exists() -> None:
     # デフォルト値が返されることを確認
     assert config["database"]["path"] == "./race.db"
     assert config["database"]["backup_dir"] == "./backup/"
-    assert config["jvlinktosqlite"]["path"] == "./JVLinkToSQLiteArtifact_0.1.0.0.exe"
+    default_path = "./HRSoftUsingJVLinkToSQLite/HRSoftUsingJVLinkToSQLite/JVLinkToSQLiteArtifact/JVLinkToSQLite.exe"  # noqa: E501
+    assert config["jvlinktosqlite"]["path"] == default_path
     assert config["jvlinktosqlite"]["setting_xml"] == "./setting.xml"
     assert config["jvlinktosqlite"]["throttle_size"] == 100
     assert config["jvlinktosqlite"]["log_level"] == "Info"
@@ -66,7 +67,8 @@ def test_load_config_merges_partial_config(
 
     # デフォルト値が残っていることを確認
     assert config["database"]["backup_dir"] == "./backup/"
-    assert config["jvlinktosqlite"]["path"] == "./JVLinkToSQLiteArtifact_0.1.0.0.exe"
+    default_path = "./HRSoftUsingJVLinkToSQLite/HRSoftUsingJVLinkToSQLite/JVLinkToSQLiteArtifact/JVLinkToSQLite.exe"  # noqa: E501
+    assert config["jvlinktosqlite"]["path"] == default_path
     assert config["jvlinktosqlite"]["setting_xml"] == "./setting.xml"
     assert config["jvlinktosqlite"]["throttle_size"] == 100
     assert "RA" in config["data_specs"]["default"]
@@ -83,7 +85,8 @@ def test_load_config_with_empty_file(temp_config_dir: Path) -> None:
 
     # デフォルト値が返されることを確認
     assert config["database"]["path"] == "./race.db"
-    assert config["jvlinktosqlite"]["path"] == "./JVLinkToSQLiteArtifact_0.1.0.0.exe"
+    default_path = "./HRSoftUsingJVLinkToSQLite/HRSoftUsingJVLinkToSQLite/JVLinkToSQLiteArtifact/JVLinkToSQLite.exe"  # noqa: E501
+    assert config["jvlinktosqlite"]["path"] == default_path
 
 
 def test_load_config_with_none_path() -> None:

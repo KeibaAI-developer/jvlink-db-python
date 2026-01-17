@@ -22,7 +22,7 @@ def temp_config_file(tmp_path: Path) -> Path:
             "backup_dir": "./test_backup/",
         },
         "jvlinktosqlite": {
-            "path": "./JVLinkToSQLiteArtifact_0.1.0.0.exe",
+            "path": "./JVLinkToSQLite.exe",
             "setting_xml": "./test_setting.xml",
             "throttle_size": 200,
             "log_level": "Debug",
@@ -49,6 +49,6 @@ def temp_jvlinktosqlite_exe(tmp_path: Path) -> Path:
     Returns:
         Path: 作成された実行ファイルのパス
     """
-    exe_path = tmp_path / "JVLinkToSQLiteArtifact_0.1.0.0.exe"
+    exe_path = tmp_path / "JVLinkToSQLite.exe"
     exe_path.write_text("dummy exe file")
     return exe_path

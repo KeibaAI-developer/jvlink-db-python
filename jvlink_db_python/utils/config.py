@@ -82,7 +82,7 @@ def _get_default_config() -> dict[str, Any]:
             "backup_dir": "./backup/",
         },
         "jvlinktosqlite": {
-            "path": "./JVLinkToSQLiteArtifact_0.1.0.0.exe",
+            "path": "./HRSoftUsingJVLinkToSQLite/HRSoftUsingJVLinkToSQLite/JVLinkToSQLiteArtifact/JVLinkToSQLite.exe",  # noqa: E501
             "setting_xml": "./setting.xml",
             "throttle_size": 100,
             "log_level": "Info",

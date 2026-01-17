@@ -8,7 +8,7 @@ database:
 
 # JVLinkToSQLite設定
 jvlinktosqlite:
-  path: "./JVLinkToSQLiteArtifact_0.1.0.0.exe"
+  path: "./HRSoftUsingJVLinkToSQLite/HRSoftUsingJVLinkToSQLite/JVLinkToSQLiteArtifact/JVLinkToSQLite.exe"
   setting_xml: "./setting.xml"
   # スロットルサイズ（オプション）
   # SQLiteへ書き込むまでに遅らせるJV-Dataのレコード数

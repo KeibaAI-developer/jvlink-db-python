@@ -45,13 +45,34 @@ race.dbから以下のデータをpandas DataFrameとして取得できます：
 
 JV-Link SDKをインストールし、JRA-VANのサービスID認証を完了させてください。
 
-### 2. パッケージのインストール
+### 2. JVLinkToSQLiteのセットアップ
+
+本プロジェクトでは、サブモジュールとして[HRSoftUsingJVLinkToSQLite](https://github.com/urasandesu/HRSoftUsingJVLinkToSQLite)を含めており、そこにある実行ファイルを使用します。
+
+#### 2-1. サブモジュールの初期化
+
+本リポジトリをクローンした後、サブモジュールを初期化してください：
+
+```bash
+# サブモジュールの初期化と更新
+git submodule update --init --recursive
+```
+
+#### 2-2. 実行ファイルを解凍
+
+/HRSoftUsingJVLinkToSQLite/HRSoftUsingJVLinkToSQLite/JVLinkToSQLiteArtifact_0.1.0.0.exeを実行し、同じディレクトリに`JVLinkToSQLiteArtifact/`フォルダが生成されることを確認してください。
+
+#### 2-3. git管理について
+
+JVLinkToSQLiteArtifact_0.1.0.0.exeの実行時に自動展開される`JVLinkToSQLiteArtifact/`フォルダは、HRSoftUsingJVLinkToSQLiteリポジトリの`.gitignore`で管理対象外に設定されています。gitの変更が気になる場合は`JVLinkToSQLiteArtifact/`を追加してください。
+
+### 3. パッケージのインストール
 
 ```bash
 pip install -e .
 ```
 
-### 3. 開発環境のセットアップ（開発者向け）
+### 4. 開発環境のセットアップ（開発者向け）
 
 ```bash
 pip install -e ".[dev]"
@@ -69,8 +90,7 @@ from jvlink_db_python.fetcher import JVLinkDataFetcher
 # データベース初期化（初回のみ）
 manager = JVLinkDBManager()
 manager.initialize_database(
-    start_date="2024-01-01",
-    end_date="2024-12-31"
+    start_date="2024-01-01"
 )
 
 # データ取得
